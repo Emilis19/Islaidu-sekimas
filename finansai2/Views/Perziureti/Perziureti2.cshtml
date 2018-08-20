@@ -1,0 +1,29 @@
+﻿@model IEnumerable<finansai2.Models.Islaida>
+
+@{
+    ViewBag.Title = "Perziureti2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Expenses list</h2>
+
+<ul class="islaidos">
+    @foreach (var islaida in Model)
+    {
+    <li>
+        <div class="date">
+            <div class="month">
+                Month: @islaida.DateTime.ToString("MMMM")
+            </div>
+            <div class="day">
+                Day: @islaida.DateTime.ToString("d ")
+            </div>
+        </div>
+        <div class="amount">
+            <span class="suma">
+                Amount (€): @islaida.Suma
+            </span>
+        </div>
+    </li>
+    }
+</ul>

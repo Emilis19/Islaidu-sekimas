@@ -1,0 +1,43 @@
+﻿@model finansai2.ViewModels.IslaidaFormViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Add an expense</h2>
+@using (Html.BeginForm("Create", "Islaidos"))
+{
+    <p class="alert alert-info">All fields are <strong>required.</strong></p>
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(m => m.Suma)
+        @Html.TextBoxFor(m => m.Suma, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Suma)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Date)
+        @Html.TextBoxFor(m => m.Date, new { @class = "form-control datepicker", placeholder = DateTime.Today.ToString("dd MMM yyyy") })
+        @Html.ValidationMessageFor(m => m.Date)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Time)
+        @Html.TextBoxFor(m => m.Time, new { @class = "form-control", placeholder = DateTime.Now.ToString("HH:mm") })
+        @Html.ValidationMessageFor(m => m.Time)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Kategorija)
+        @Html.DropDownListFor(m => m.Kategorija, new SelectList(Model.Kategorijos, "Id", "Name"), "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Kategorija)
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $('.datepicker').datepicker({
+            format: 'dd M yyyy',
+            orientation: "bottom"
+        });
+    </script>
+}

@@ -1,0 +1,24 @@
+﻿@model finansai2.ViewModels.IslaidaFormViewModel
+@using finansai2.ViewModels
+@{
+    ViewBag.Title = "AddKategorija";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Add a category</h2>
+@using (Html.BeginForm("AddKategorija", "Kategorijos"))
+{
+    <p class="alert alert-info">All fields are <strong>required.</strong></p>
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jquery")
+}
+

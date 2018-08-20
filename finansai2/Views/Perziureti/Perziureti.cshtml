@@ -1,0 +1,41 @@
+﻿@model finansai2.ViewModels.PerziuretiFormViewModel
+
+@{
+
+    ViewBag.Title = "Perziureti";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>View by date and category</h2>
+@using (Html.BeginForm("Perziureti", "Perziureti"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(m => m.dateFrom)
+        @Html.TextBoxFor(m => m.dateFrom, new { @class = "form-control datepicker", placeholder = DateTime.Today.ToString("dd MMM yyyy") })
+        @Html.ValidationMessageFor(m => m.dateFrom)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.dateTo)
+        @Html.TextBoxFor(m => m.dateTo, new { @class = "form-control datepicker", placeholder = DateTime.Today.ToString("dd MMM yyyy") })
+        @Html.ValidationMessageFor(m => m.dateTo)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Kategorija)
+        @Html.DropDownListFor(m => m.Kategorija, new SelectList(Model.Kategorijos, "Id", "Name"), "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Kategorija)
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $('.datepicker').datepicker({
+            format: 'dd M yyyy',
+            orientation: "bottom"
+        });
+    </script>
+}
